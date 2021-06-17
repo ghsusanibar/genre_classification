@@ -48,7 +48,6 @@ def go(config: DictConfig):
                 "artifact_description": "Data with preprocessing applied"
             },
         )
-        ## YOUR CODE HERE: call the preprocess step
 
     if "check_data" in steps_to_execute:
         _ = mlflow.run(
@@ -60,9 +59,9 @@ def go(config: DictConfig):
                 "ks_alpha": config["data"]["ks_alpha"]
             },
         )
-        ## YOUR CODE HERE: call the check_data step
 
     if "segregate" in steps_to_execute:
+
         _ = mlflow.run(
             os.path.join(root_path, "segregate"),
             "main",
@@ -74,10 +73,8 @@ def go(config: DictConfig):
                 "stratify": config["data"]["stratify"]
             },
         )
-        ## YOUR CODE HERE: call the segregate step
 
     if "random_forest" in steps_to_execute:
-
         # Serialize decision tree configuration
         model_config = os.path.abspath("random_forest_config.yml")
 
@@ -96,9 +93,9 @@ def go(config: DictConfig):
                 "stratify": config["data"]["stratify"]
             },
         )
-        ## YOUR CODE HERE: call the random_forest step
 
     if "evaluate" in steps_to_execute:
+
         _ = mlflow.run(
             os.path.join(root_path, "evaluate"),
             "main",
@@ -107,7 +104,6 @@ def go(config: DictConfig):
                 "test_data": "data_test.csv:latest"
             },
         )
-        ## YOUR CODE HERE: call the evaluate step
 
 
 if __name__ == "__main__":
